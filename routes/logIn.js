@@ -1,8 +1,13 @@
 var express = require('express');
+
+const mg = require('./modules/mongodb')
+var userdb = new mg('user')
+
 var router = express.Router();
 
 router.get('/', (req, res, next)=>{
-  res.send({'login':2222})
+  
+  res.json({'login':1111})
 });
 router.get('/in', (req, res, next)=>{
   req.session.user='userName'
@@ -14,7 +19,10 @@ router.get('/out', (req, res, next)=>{
 });
 
 router.post('/',(req,res,next)=>{
-  res.send({'login_check':2})
+  userdb.find('account',req.body,{},(err,user)=>{
+    if(user.length==0){res.redirect('/login'); req.session.user=user.id;}
+    else{res.json({'login':1}); req.session.user='admin';}
+  })  
 })
 
 module.exports = router;

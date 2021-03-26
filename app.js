@@ -1,4 +1,3 @@
-var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
 var path = require('path');
 const express = require('express');
@@ -26,6 +25,9 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
+  //Next Fectch Accept
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
   if (req.cookies.yoyohub_user_sid && !req.session.user) {
       res.clearCookie('user_sid');        
   }
@@ -36,10 +38,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const router = require('./routes/router')
 app.use('/',router)
-
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
