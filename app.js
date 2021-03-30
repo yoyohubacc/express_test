@@ -1,6 +1,7 @@
 var cookieParser = require('cookie-parser');
 var path = require('path');
 const express = require('express');
+const nunjucks = require('nunjucks')
 var session = require('express-session');
 
 const app = express();
@@ -8,11 +9,14 @@ const port = process.env.PORT || 33333;
 
 // var morgan = require('morgan');
 // app.use(morgan('dev'));
-
 app.use(express.json());
 app.use(express.Router({caseSensitive: 'Enable'}));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+nunjucks.configure('views', {express: app,autoescape: true});
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
 
 app.use(session({
   key: 'yoyohub_user_sid',
@@ -33,6 +37,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -11,22 +11,24 @@ var requireAdminAuthentication = (req, res, next) => {
   else { res.redirect('/login') }
 };
 
+//login check allow
 // router.all(/\/(?!admin)(?!login)\w*/g,requireAuthentication)
 // router.all('/admin',requireAdminAuthentication)
 
 const logIn = require('./logIn')
 router.use('/login',logIn)
-const logOut = require('./logOut')
-router.use('/logOut',logOut)
+
+const item = require('./item/index')
+router.use('/item',item)
 
 const index = require('./index')
-const item = require('./item/index')
+
 const price = require('./price/index')
 const shipping = require('./shipping/index')
 const finance = require('./finance/index')
 router.use('/',index)
 router.use('/home',index)
-router.use('/item',item)
+
 router.use('/price',price)
 router.use('/shipping',shipping)
 router.use('/finance',finance)
@@ -36,7 +38,7 @@ router.use('/admin',admin)
 
 router.use((req, res, next)=>{
   res.status(404);
-  res.json({ error: 'Not found' });
+  res.render('404.html');
 });
 
 module.exports = router;

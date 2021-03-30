@@ -1,0 +1,75 @@
+{% extends "baseItem.html" %}
+{% block head %}
+{{super()}}
+{% endblock %}
+
+{% block nav %}
+{{super()}}
+{% endblock %}
+{% block main %}
+{{super()}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 px-5">
+      <h4 class="mb-3">필수 항목 입력</h4>
+      <form class="needs-validation" novalidate>
+        <div class="row g-3">
+          <div class="col-sm-4">
+            <label for="brand" class="form-label">브랜드</label>
+            <input type="text" class="form-control" name="brand" id="brand" placeholder="" value="" required>
+          </div>
+
+          <div class="col-sm-8">
+            <label for="title" class="form-label">상품명</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="" value="" required>
+          </div>
+
+          <div class="col-6 col-sm-3">
+            <label for="barcode" class="form-label">바코드</label>
+            <input type="number" class="form-control" name="barcode" id="barcode" placeholder="">
+          </div>
+          <div class="col-6 col-sm-3">
+            <label for="capacity" class="form-label">용량</label>
+            <input type="text" class="form-control" name="capacity" id="capacity" placeholder="ml, g, 몇매, 몇개, 몇정" required>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label for="color" class="form-label">색상</label>
+            <input type="text" class="form-control" name="" id="color" placeholder="" required>
+          </div>
+          <div class="col-6 col-sm-3">
+            <label for="weight" class="form-label">무게(kg)</label>
+            <input type="text" class="form-control" name="weight" id="weight" placeholder="00.00 kg" required>
+          </div>
+          
+          <div class="col-6">
+            <label for="category" class="form-label">카테고리</label>
+            <select class="form-select" id="category" required>
+              <option value="">Choose...</option>
+              <option>화장품</option>
+              <option>건강식품</option>
+              <option>의류</option>
+            </select>
+          </div>
+        </div>
+        
+        <hr class="my-4">
+
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="same-address">
+          <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="save-info">
+          <label class="form-check-label" for="save-info">Save this information for next time</label>
+        </div>
+
+        <hr class="my-4">
+
+        <button class="btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}
